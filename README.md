@@ -1,66 +1,93 @@
-# 2️⃣ Arquitectura del Proyecto
+# 💰 Expense Manager Backend
 
-## 📂 backend-app/ (Carpeta raíz del backend)
+Este es el backend para el sistema de gestión de gastos, desarrollado con **Node.js**, **Express**, y **Sequelize** para manejar una base de datos **PostgreSQL**.
 
-![alt text](image-1.png)
+## 📌 Tecnologías Utilizadas
 
-### Diagrama Relacional
+- **Node.js** - Entorno de ejecución para JavaScript.
+- **Express.js** - Framework web para la creación de APIs.
+- **Sequelize** - ORM para manejar la base de datos PostgreSQL.
+- **PostgreSQL** - Base de datos relacional.
+- **Docker** - Para contenerización del backend y base de datos.
+- **TypeScript** - Para tipado estático y mejor mantenimiento del código.
 
-📌 Diagrama Relacional
-Voy a generar la imagen del diagrama con estos modelos:
+---
 
-1️⃣ users
+## 🗂️ Modelo de Datos
 
-- id (PK)
-- name
-- email (único)
-- password
-- createdAt
-- updatedAt
+El sistema maneja **tres entidades principales**:
 
-2️⃣ categories
+### 1️⃣ **Usuarios (`Users`)**
 
-- id (PK)
-- name
-- createdAt
-- updatedAt
+Cada usuario puede registrar múltiples gastos.
 
-3️⃣ expenses
+| Campo    | Tipo            | Descripción           |
+| -------- | --------------- | --------------------- |
+| id       | INTEGER (PK)    | Identificador único   |
+| name     | STRING          | Nombre del usuario    |
+| email    | STRING (UNIQUE) | Correo electrónico    |
+| password | STRING          | Contraseña encriptada |
 
-- id (PK)
-- name
-- amount
-- date
-- userId (FK → users.id)
-- categoryId (FK → categories.id)
-- createdAt
-- updatedAt
+🔗 **Relación:** Un usuario tiene **muchos gastos** (**1:N**).
 
-### Enpoints
+---
 
-Vamos a definir los siguientes endpoints básicos para gestionar los gastos:
+### 2️⃣ **Gastos (`Expenses`)**
 
-📌 Usuarios (Users)
-POST /users → Crear un usuario
+Cada gasto tiene una cantidad, fecha y pertenece a un usuario y una categoría.
 
-GET /users/:id → Obtener un usuario por ID
+| Campo      | Tipo         | Descripción             |
+| ---------- | ------------ | ----------------------- |
+| id         | INTEGER (PK) | Identificador único     |
+| amount     | DECIMAL      | Monto del gasto         |
+| date       | DATE         | Fecha del gasto         |
+| userId     | INTEGER (FK) | Usuario que lo registró |
+| categoryId | INTEGER (FK) | Categoría del gasto     |
 
-GET /users → Obtener todos los usuarios
+🔗 **Relación:**
 
-📌 Gastos (Expenses)
-POST /expenses → Crear un gasto
+- Un gasto pertenece a **un usuario** (**N:1**).
+- Un gasto pertenece a **una categoría** (**N:1**).
 
-GET /expenses/:id → Obtener un gasto por ID
+---
 
-GET /expenses?userId=X → Obtener todos los gastos de un usuario
+### 3️⃣ **Categorías (`Categories`)**
 
-PUT /expenses/:id → Actualizar un gasto
+Cada gasto pertenece a una categoría.
 
-DELETE /expenses/:id → Eliminar un gasto
+| Campo | Tipo         | Descripción            |
+| ----- | ------------ | ---------------------- |
+| id    | INTEGER (PK) | Identificador único    |
+| name  | STRING       | Nombre de la categoría |
 
-📌 Categorías (Categories)
-POST /categories → Crear una categoría
+🔗 **Relación:** Una categoría puede tener **muchos gastos** (**1:N**).
 
-GET /categories → Obtener todas las categorías
+## 📌 Endpoints de la API
 
-GET /categories/:id → Obtener una categoría por ID
+### 👤 Usuarios
+
+POST /users/create → Crear un usuario
+GET /users/:id → Obtener usuario por ID
+GET /users/all → Obtener todos los usuarios
+
+### 💰 Gastos
+
+POST /expenses/create → Crear un gasto
+GET /expenses/all → Obtener todos los gastos
+GET /expenses/user/:userId → Obtener gastos de un usuario
+
+### 🏷️ Categorías
+
+POST /categories/create → Crear una categoría
+GET /categories/all → Obtener todas las categorías
+
+---
+
+## 🚀 Instalación y Ejecución
+
+### 1️⃣ Clonar el repositorio
+
+```sh
+git clone https://github.com/tu-usuario/expense-backend.git
+cd expense-backend
+```
