@@ -1,0 +1,74 @@
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+# Node.js
+docker-compose.yml
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Directorios de logs
+logs
+*.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+lerna-debug.log
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Caché de TypeScript
+*.tsbuildinfo
+
+# Salida de compilación
+dist/
+build/
+*.js.map
+
+# Bases de datos locales y datos temporales
+*.sqlite
+*.sqlite3
+*.db
+*.local.db
+*.tgz
+*.bak
+
+# Archivos de configuración específicos de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de Docker (si usas Docker)
+docker-compose.override.yml
+.dockerignore
+
+# Archivos de Sequelize (migraciones y seeds en caso de que sean generados automáticamente)
+migrations/
+seeders/
+
+# Archivos de cobertura de pruebas
+coverage/
+.nyc_output/
+
+# Archivos de dependencias de paquetes
+yarn.lock
+pnpm-lock.yaml
+
+# Archivos de cache de ESLint/Prettier
+.eslintcache
+.prettiercache
+
+# Archivos de sesiones o caché en general
+.session
+.cache
+tmp/
