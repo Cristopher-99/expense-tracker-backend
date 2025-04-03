@@ -19,7 +19,7 @@ export class UserController {
   static async getUserById(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id, { include: [{ model: Expense }] });
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado" });
       }

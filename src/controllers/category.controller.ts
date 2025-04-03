@@ -31,7 +31,9 @@ export class CategoryController {
   static async getCategoryById(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const category = await Category.findByPk(id);
+      const category = await Category.findByPk(id, {
+        include: [{ model: Expense }],
+      });
       if (!category)
         return res.status(404).json({ error: "Category not found" });
       res.json(category);

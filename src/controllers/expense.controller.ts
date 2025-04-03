@@ -42,11 +42,11 @@ export class ExpenseController {
   static async updateExpense(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const { amount, category, date, userId } = req.body;
+      const { amount, categoryId, date, userId } = req.body;
       const expense = await Expense.findByPk(id);
       if (!expense) return res.status(404).json({ error: "Expense not found" });
 
-      await expense.update({ amount, category, date, userId });
+      await expense.update({ amount, categoryId, date, userId });
       res.json(expense);
     } catch (error) {
       res.status(500).json({ error: "Error updating expense", details: error });
