@@ -6,6 +6,7 @@ import sequelize from "./config/database";
 import userRoutes from "./routes/user.routes";
 import expenseRoutes from "./routes/expense.routes";
 import categoryRoutes from "./routes/category.routes";
+import authRoutes from "./routes/auth.routes";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/users", userRoutes);
 app.use("/expenses", expenseRoutes);
 app.use("/categories", categoryRoutes);
+app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 3000;
 
